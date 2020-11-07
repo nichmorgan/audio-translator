@@ -11,7 +11,6 @@ frames = 250_000
 
 
 async def main(**kwargs):
-
     buffer = np.empty((frames, channels), dtype='float32', )
     print('Gravando ...')
     await audio.record_audio(buffer, **kwargs)
@@ -22,7 +21,7 @@ async def main(**kwargs):
     stream = audio.numpy_audio_to_bytesio(buffer)
     audio.save_binary_to_file(stream, 'input.wav')
 
-    status, text, score =  ibm.speech_to_text(stream)
+    status, text, score = ibm.speech_to_text(stream)
     if not status:
         raise Exception('A transcrição do audio falhou')
     else:
